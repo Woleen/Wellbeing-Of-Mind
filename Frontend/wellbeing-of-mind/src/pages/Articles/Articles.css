@@ -57,7 +57,7 @@
 
 .search .search-input {
   padding: 0 10px;
-  width: 100%; /* Take up remaining space */
+  width: 100%;
   caret-color: #536bf6;
   font-size: 21px;
   font-weight: 300;
