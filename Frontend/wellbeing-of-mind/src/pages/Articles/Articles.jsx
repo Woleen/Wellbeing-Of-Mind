@@ -75,7 +75,7 @@ const ArticleList = () => {
           </div>
         </div>
       </div>
-      <Loader loading={loading} />
+      {loading && <Loader loading={loading} />} {/* Render the Loader only when loading is true */}
       {!loading && (
         <div>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 justify-content-center">

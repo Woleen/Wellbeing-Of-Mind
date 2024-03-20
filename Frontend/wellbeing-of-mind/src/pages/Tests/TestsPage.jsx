@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../CustomPagination";
-import "../Articles/Articles.css";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import Loader from "../../utils/Loader";
 
 
 const TestsList = () => {
@@ -21,6 +21,7 @@ const TestsList = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
+        setLoading(true);
         const url = searchQuery
           ? `https://localhost:5226/api/tests/search?q=${searchQuery}&page=${currentPage}&pageSize=${pageSize}`
           : `https://localhost:5226/api/tests?page=${currentPage}&pageSize=${pageSize}`;
@@ -28,14 +29,13 @@ const TestsList = () => {
         const response = await fetch(url);
         const data = await response.json();
         setTests(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching tests:", error);
+      } finally {
         setLoading(false);
       }
     };
 
-    setLoading(true);
     fetchArticles();
   }, [currentPage, pageSize, searchQuery]);
 
@@ -49,10 +49,6 @@ const TestsList = () => {
 
   const handleSearch = () => {
     setCurrentPage(1);
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
   };
 
   return (
@@ -73,43 +69,38 @@ const TestsList = () => {
           </div>
         </div>
       </div>
-      {loading && (
-        <div className="loader" style={{ opacity: loading ? 1 : 0, transition: "opacity 0.5s" }}></div>
-      )}
-      {!loading && (
+      {loading ? <Loader loading={{ loading }} /> : (
         <div>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 justify-content-center">
             {tests.map((test) => (
-            <div
-              key={test.id}
-              className="col d-flex justify-content-center"
-              onClick={() => handleCardClick(test.id)}
-              style={{ cursor: "pointer" }}
-            >
-            <Card sx={{ maxWidth: 345 }}>   
-            <CardActionArea>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {test.title}
-                </Typography>
-               <Typography variant="body2" color="text.secondary">
-                    {test.description}
-                </Typography>
-              </CardContent>
-              </CardActionArea>
-            </Card>
-            
-            </div>
+              <div
+                key={test.id}
+                className="col d-flex justify-content-center"
+                onClick={() => handleCardClick(test.id)}
+                style={{ cursor: "pointer" }}
+              >
+                <Card sx={{ maxWidth: 345 }}>   
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {test.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {test.description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </div>
             ))}
           </div>
           <div className="d-flex justify-content-center py-4">
-        <Pagination currentPage={currentPage} handlePageChange={handlePageChange} articles={tests}/>
-      </div>
+            <Pagination currentPage={currentPage} handlePageChange={handlePageChange} articles={tests}/>
+          </div>
         </div>
       )}
     </div>
   );
 };
-
 
 export default TestsList;

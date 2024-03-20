@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { CardActionArea } from '@mui/material';
 import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
-
 
 
 const AnxietyTest = () => {

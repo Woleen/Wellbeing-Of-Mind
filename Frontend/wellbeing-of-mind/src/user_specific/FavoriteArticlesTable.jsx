@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const columns = [
-  { id: 'title', label: 'Go Back to your favourite articles', minWidth: 170 },
+  { id: 'title', label: "Favorite Articles" , minWidth: 50, align: 'center', minWidth: 170 },
 ];
 
 function createData(title) {
