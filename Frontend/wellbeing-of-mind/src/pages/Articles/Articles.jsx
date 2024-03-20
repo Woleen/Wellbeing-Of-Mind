@@ -4,6 +4,7 @@ import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import ArticleCard from "./ArticleCard";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../CustomPagination";
+import Loader from "../../utils/Loader";
 import "./Articles.css";
 
 const ArticleList = () => {
@@ -74,9 +75,7 @@ const ArticleList = () => {
           </div>
         </div>
       </div>
-      {loading && (
-        <div className="loader" style={{ opacity: loading ? 1 : 0, transition: "opacity 0.5s" }}></div>
-      )}
+      <Loader loading={loading} />
       {!loading && (
         <div>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 justify-content-center">
