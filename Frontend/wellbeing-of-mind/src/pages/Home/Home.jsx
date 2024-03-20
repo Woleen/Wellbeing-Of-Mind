@@ -2,7 +2,7 @@ import React from 'react';
 
 function Homepage() {
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 text-white bg-dark p-4">
       <h1 className="display-4">Welcome to Wellbeing of Mind</h1>
       <p className="lead mt-4">Your go-to destination for mental health and wellness.</p>
 
