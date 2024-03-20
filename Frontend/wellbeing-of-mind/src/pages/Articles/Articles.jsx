@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
-import ArticleCard from "./ArticleCard";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../CustomPagination";
 import Loader from "../../utils/Loader";
+import SearchBar from "../../utils/SearchBar";
+import ArticleCard from "./ArticleCard";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Articles.css";
 
 const ArticleList = () => {
@@ -18,21 +19,20 @@ const ArticleList = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
+        setLoading(true);
         const url = searchQuery
           ? `https://localhost:5226/api/articles/search?q=${searchQuery}&page=${currentPage}&pageSize=${pageSize}`
           : `https://localhost:5226/api/articles?page=${currentPage}&pageSize=${pageSize}`;
-
         const response = await fetch(url);
         const data = await response.json();
         setArticles(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching articles:", error);
+      } finally {
         setLoading(false);
       }
     };
 
-    setLoading(true);
     fetchArticles();
   }, [currentPage, pageSize, searchQuery]);
 
@@ -46,7 +46,6 @@ const ArticleList = () => {
 
   const handleSearch = () => {
     setCurrentPage(1);
-    setLoading(true);
   };
 
   const handleCreateNew = () => {
@@ -57,25 +56,13 @@ const ArticleList = () => {
     <div className="container mt-5">
       <h2>Article List</h2>
       <div className="row justify-content-center mb-3 mt-3">
-        <div className="col-md-4 py-2">
-          <div className="search">
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search Articles"
-              onChange={(e) => {
-                setTimeout(() => {
-                  setSearchQuery(e.target.value);
-                }, 1000);
-              }}
-            />
-            <button className="search-icon bg-dark" type="button" onClick={handleSearch}>
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </div>
-        </div>
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          handleSearch={handleSearch}
+        />
       </div>
-      {loading && <Loader loading={loading} />} {/* Render the Loader only when loading is true */}
+      {loading && <Loader loading={loading} />}
       {!loading && (
         <div>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 justify-content-center">
