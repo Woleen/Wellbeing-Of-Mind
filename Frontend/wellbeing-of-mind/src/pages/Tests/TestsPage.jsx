@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../CustomPagination";
 import Card from '@mui/material/Card';
@@ -8,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Loader from "../../utils/Loader";
+import SearchBar from "../../utils/SearchBar";
 
 
 const TestsList = () => {
@@ -48,26 +47,18 @@ const TestsList = () => {
   };
 
   const handleSearch = () => {
-    setCurrentPage(1);
+      setCurrentPage(1);
   };
 
   return (
     <div className="container mt-5">
       <h2>Tests List</h2>
       <div className="row justify-content-center mb-3 mt-3">
-        <div className="col-md-4 py-2">
-          <div className="search">
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search Tests"
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button className="search-icon" type="button" onClick={handleSearch}>
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </div>
-        </div>
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          handleSearch={handleSearch}
+        />
       </div>
       {loading ? <Loader loading={{ loading }} /> : (
         <div>
