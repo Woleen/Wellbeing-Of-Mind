@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import StickyHeadTable from '../../user_utils/favoriteArticlesTable';
+import StickyHeadTable from '../../user_specific/FavoriteArticlesTable';
+import AddToFavoritesButton from "../../user_specific/AddToFavorites";
+import { TextToSpeechButton } from "../../utils/TextToSpeechButton";
 import { useParams } from "react-router-dom";
 import "./Articles.css";
 import DOMPurify from 'dompurify';
-import { useSpeechSynthesis } from 'react-speech-kit';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+
 
 const ArticleDetail = () => {
   const { articleId } = useParams();
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
-  const { speak, speaking, cancel } = useSpeechSynthesis();
+
 
   useEffect(() => {
     fetch(`https://localhost:5226/api/articles/${articleId}`)
@@ -21,9 +21,7 @@ const ArticleDetail = () => {
       .finally(() => setLoading(false));
   }, [articleId]);
 
-  const handleSpeak = () => {
-    speaking ? cancel() : article.content ? speak({ text: article.content }) : console.error("Article content is empty");
-  };
+
 
   return (
     <div>
@@ -35,7 +33,7 @@ const ArticleDetail = () => {
           <div className="row">
             <div className="col-lg-8 p-4 rounded">
               <h2 className="text-white">{article.title}</h2>
-              <div className="text-justify" style={{ textAlign: "justify" }}>
+              <div style={{ textAlign: "justify" }}>
                 <div className="text-white" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.content) }} />
               </div>
               <p className="mt-3 text-right">
@@ -43,10 +41,11 @@ const ArticleDetail = () => {
               </p>
             </div>
             <div className="col-lg-4">
-              <button onClick={handleSpeak} className="btn btn-dark btn-lg mt-4" style={{ width: '8vw', height: '6vh' }}>
-                {speaking ? <FontAwesomeIcon icon={faPlay} beat /> : <FontAwesomeIcon icon={faPlay} />}
-              </button>
-              < StickyHeadTable className='mt-4'/>
+              <div className="flex-column position-sticky">
+                <TextToSpeechButton content={article.content} />
+                <AddToFavoritesButton />
+                <StickyHeadTable />
+              </div>
             </div>
           </div>
         </div>

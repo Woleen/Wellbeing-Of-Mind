@@ -78,3 +78,7 @@
   border: none; /* Remove button border */
   cursor: pointer;
 }
+
+.article-content {
+  text-align: justify;
+}

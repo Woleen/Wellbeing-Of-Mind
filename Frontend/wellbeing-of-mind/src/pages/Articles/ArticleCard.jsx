@@ -27,7 +27,7 @@ export default function ArticleCard({ article }) {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: "345px", padding: "1px", boxShadow: "initial"}}>
         <CardActionArea>
           <CardMedia
             component="img"
