@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import StickyHeadTable from '../../user_utils/favoriteArticlesTable';
 import { useParams } from "react-router-dom";
 import "./Articles.css";
 import DOMPurify from 'dompurify';
@@ -42,9 +43,10 @@ const ArticleDetail = () => {
               </p>
             </div>
             <div className="col-lg-4">
-            <button onClick={handleSpeak} className="btn btn-dark btn-lg mt-4" style={{ width: '8vw', height: '6vh' }}>
+              <button onClick={handleSpeak} className="btn btn-dark btn-lg mt-4" style={{ width: '8vw', height: '6vh' }}>
                 {speaking ? <FontAwesomeIcon icon={faPlay} beat /> : <FontAwesomeIcon icon={faPlay} />}
               </button>
+              < StickyHeadTable className='mt-4'/>
             </div>
           </div>
         </div>
