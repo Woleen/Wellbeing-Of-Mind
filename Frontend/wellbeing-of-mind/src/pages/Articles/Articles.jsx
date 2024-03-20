@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons"; // Import faPlus for the "Create New" button
+import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import ArticleCard from "./ArticleCard";
 import { useNavigate } from "react-router-dom";
 import Pagination from "../CustomPagination";
@@ -46,9 +46,6 @@ const ArticleList = () => {
   const handleSearch = () => {
     setCurrentPage(1);
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
   };
 
   const handleCreateNew = () => {
@@ -71,7 +68,7 @@ const ArticleList = () => {
                 }, 1000);
               }}
             />
-            <button className="search-icon" type="button" onClick={handleSearch}>
+            <button className="search-icon bg-dark" type="button" onClick={handleSearch}>
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
@@ -98,7 +95,7 @@ const ArticleList = () => {
             <Pagination currentPage={currentPage} handlePageChange={handlePageChange} articles={articles} />
           </div>
           <div className="d-flex justify-content-center py-4">
-            <button className="btn btn-primary" onClick={handleCreateNew}>
+            <button className="btn btn-dark" onClick={handleCreateNew}>
               <FontAwesomeIcon icon={faPlus} /> Create New
             </button>
           </div>

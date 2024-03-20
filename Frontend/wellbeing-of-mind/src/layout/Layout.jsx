@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNewspaper, faVial, faUsers, faHome, faInfoCircle, faShieldAlt, faUser, faBook, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faNewspaper, faVial, faUsers, faInfoCircle, faUser, faBook, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import './Layout.css';
 
 const Layout = () => {
-  // State to manage the theme
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(true);
 
   // Function to toggle the theme
   const toggleTheme = () => {

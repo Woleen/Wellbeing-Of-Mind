@@ -42,11 +42,17 @@
   color: #f8f9fa; /* Lighter color on hover in dark mode */
 }
 
+.blur-background {
+  background-color: rgba(0, 0, 0, 0.7); /* Black overlay with 70% opacity */
+  backdrop-filter: blur(10px); /* Blur effect */
+}
 /* Additional Styling */
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  background-image: url('./images/BackgroundWom1.png');
+  background-attachment: fixed;
 }
 
 .container {

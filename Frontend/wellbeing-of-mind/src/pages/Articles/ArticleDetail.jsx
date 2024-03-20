@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import "./Articles.css";
 import DOMPurify from 'dompurify';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 const ArticleDetail = () => {
   const { articleId } = useParams();
@@ -18,32 +20,54 @@ const ArticleDetail = () => {
       .finally(() => setLoading(false));
   }, [articleId]);
 
-const handleSpeak = () => {
-  speaking ? cancel() : article.content ? speak({ text: article.content }) : console.error("Article content is empty");
-};
+  const handleSpeak = () => {
+    speaking ? cancel() : article.content ? speak({ text: article.content }) : console.error("Article content is empty");
+  };
 
   return (
     <div>
-    {loading && (
-      <div className="loader" style={{ opacity: loading ? 1 : 0, transition: "opacity 0.5s" }}></div>
-    )}
-    {!loading && (
-    <div className="container mt-4">
-      <div className="row">
-        <div className="col-lg-8">
-          <h2>{article.title}</h2>
-          <button onClick={handleSpeak}>
-              {speaking ? 'Pause' : 'Read Aloud'}
-            </button>
-          <div className="content" style={{ textAlign: "justify" }}>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.content) }} />
+      {loading && (
+        <div className="loader" style={{ opacity: loading ? 1 : 0, transition: "opacity 0.5s" }}></div>
+      )}
+      {!loading && (
+        <div className="container mt-4 blur-background">
+          <div className="row">
+            <div className="col-lg-8 p-4 rounded">
+              <h2 className="text-white">{article.title}</h2>
+              <button onClick={handleSpeak} className="btn btn-dark btn-sm">
+                {speaking ? <FontAwesomeIcon icon={faPlay} beat /> : <FontAwesomeIcon icon={faPlay} />}
+              </button>
+              <div className="text-justify" style={{ textAlign: "justify" }}>
+                <div className="text-white" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.content) }} />
+              </div>
+              <p className="mt-3 text-right">
+                Author: {article.author}
+              </p>
+            </div>
+            <div className="col-lg-4">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Header 1</th>
+                    <th>Header 2</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Row 1, Cell 1</td>
+                    <td>Row 1, Cell 2</td>
+                  </tr>
+                  <tr>
+                    <td>Row 2, Cell 1</td>
+                    <td>Row 2, Cell 2</td>
+                  </tr>
+                  {/* Add more rows as needed */}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <p className="mt-3" style={{ textAlign: "right" }}>
-            Author: {article.author}
-          </p>
         </div>
-      </div>
-    </div>)}
+      )}
     </div>
   );
 };

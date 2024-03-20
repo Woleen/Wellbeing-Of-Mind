@@ -1,23 +1,48 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const ArticleEditor = ({ onChange }) => {
-  const [editorHtml, setEditorHtml] = useState('');
+class ReactQuillWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.modules = {
+      toolbar: [
+        [{ header: [1, 2, false] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+        ['link', 'image'],
+        ['clean']
+      ]
+    };
 
-  const handleChange = (html) => {
-    setEditorHtml(html);
-    onChange(html);
-  };
+    this.formats = [
+      'header',
+      'bold', 'italic', 'underline', 'strike', 'blockquote',
+      'list',
+      'link', 'image'
+    ];
+  }
 
-  return (
-    <ReactQuill
-      theme="snow"
-      value={editorHtml}
-      onChange={handleChange}
-      style = {{ backgroundColor: 'white'  ,height: '56vh'}}
-    />
-  );
-};
+  handleChange(value) {
+    this.setState({ text: value });
+  }
 
-export default ArticleEditor;
+  render() {
+    return (
+      <div>
+        <ReactQuill
+          value={this.state.text}
+          modules={this.modules}
+          formats={this.formats}
+          onChange={this.handleChange}
+        />
+      </div>
+    );
+  }
+}
+
+export default ReactQuillWrapper;
