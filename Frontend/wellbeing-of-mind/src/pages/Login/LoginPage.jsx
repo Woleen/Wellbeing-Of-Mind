@@ -12,7 +12,7 @@ import logo from "../../images/logo.png";
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const navigate = useNavigate(); // Add useNavigate hook
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -42,9 +42,15 @@ function Login() {
       console.error('Error:', error);
     }
   };
-
+  
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+  
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={darkTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -53,6 +59,11 @@ function Login() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            position: 'relative',
+            backdropFilter: 'blur(5px)',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            borderRadius: '8px',
+            padding: '24px',
           }}
         >
           <img src={logo} alt="Logo" style={{ width: "200px", marginBottom: 16 }} />
@@ -81,6 +92,7 @@ function Login() {
               autoComplete="current-password"
             />
             <Button
+            className='text-white bg-dark'
               type="submit"
               fullWidth
               variant="contained"
@@ -90,12 +102,12 @@ function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link className='text-white' href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link className='text-white' href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

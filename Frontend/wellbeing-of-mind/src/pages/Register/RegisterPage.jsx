@@ -86,9 +86,13 @@ function SignUp() {
           }
       }
   };
-
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
     return (
-        <ThemeProvider theme={createTheme()}>
+        <ThemeProvider theme={darkTheme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -97,6 +101,10 @@ function SignUp() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        backdropFilter: 'blur(5px)',
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        borderRadius: '8px',
+                        padding: '24px',
                     }}
                 >
                     <img src={logo} alt="Logo" style={{ width: "200px", marginBottom: 16 }} />
@@ -180,6 +188,7 @@ function SignUp() {
                             </Grid>
                         </Grid>
                         <Button
+                            className='text-white bg-dark'
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -189,7 +198,7 @@ function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="/login" variant="body2">
+                                <Link className='text-white' href="/login" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
