@@ -19,7 +19,8 @@ It's welcoming page, providing telephone numbers to various crisis helpline serv
 
 3. Writing article functionality allows your authorized users to post their own articles.
    
-![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/f02302fc-fe08-49e5-9a9a-f906e7293e3d)
+![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/6837234a-94ff-4f6e-9849-aea06be71ede)
+
 
 # Tests
 
