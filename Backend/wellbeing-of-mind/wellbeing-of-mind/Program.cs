@@ -4,18 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
-using System;
 using System.Text;
 using wellbeing_of_mind.Infastructure;
 using wellbeing_of_mind.Domain;
-using System.Text.RegularExpressions;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // CORS configuration
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
+    options.AddPolicy("AllowOrigin", builder =>
     {
         builder.WithOrigins("http://localhost:3000")
                .AllowAnyHeader()
@@ -77,8 +76,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Entity Framework Core configuration for SQL Server
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdminRole", policy =>
+        policy.RequireRole("Admin"));
 
+    options.AddPolicy("RequireModeratorRole", policy =>
+        policy.RequireRole("Moderator"));
+
+    options.AddPolicy("RequireRole", policy =>
+        policy.RequireRole("User", "Moderator", "Admin"));
+
+});
+// SQL Server
 
 builder.Services.AddDbContext<UsersDbContext>((serviceProvider, options) =>
 {
@@ -86,8 +96,6 @@ builder.Services.AddDbContext<UsersDbContext>((serviceProvider, options) =>
     options.UseSqlServer(connectionString);
 });
 
-
-// Identity configuration
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;
@@ -95,22 +103,38 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 8;
-
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
     options.Lockout.MaxFailedAccessAttempts = 5;
-
     options.User.RequireUniqueEmail = true;
-
     options.SignIn.RequireConfirmedAccount = false;
 })
 .AddEntityFrameworkStores<UsersDbContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders()
+.AddRoles<IdentityRole>();
 
-// Swagger configuration
+async Task SeedRoles(RoleManager<IdentityRole> roleManager)
+{
+    var roles = new List<string> { "Admin", "Moderator", "User" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+await SeedRoles(roleManager);
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -124,14 +148,14 @@ else
     app.UseExceptionHandler();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
+app.UseCors("AllowOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseResponseCaching();
-app.UseCors();
 app.MapControllers();
+app.UseResponseCaching();
+
 app.Run();

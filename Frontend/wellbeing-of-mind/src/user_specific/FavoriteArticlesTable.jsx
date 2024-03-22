@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,21 +8,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { jwtDecode } from "jwt-decode";
 
 const columns = [
-  { id: 'title', label: "Favorite Articles" , minWidth: 50, align: 'center', minWidth: 170 },
-];
-
-function createData(title) {
-  return { title };
-}
-
-const rows = [
-  createData('Unraveling the Depths of Psychology: Understanding the Human Mind'),
-  createData('Overcoming Social Anxiety: Steps to Confidence'),
-  createData('The Impact of Sleep on Cognitive Function'),
-  createData('Building Emotional Resilience in Adversity'),
-  createData('The Psychology of Decision-Making in everyday life'),
+  { id: 'title', label: "Favorite Articles", minWidth: 50, align: 'center', minWidth: 170 },
 ];
 
 const darkTheme = createTheme({
@@ -31,6 +21,35 @@ const darkTheme = createTheme({
 });
 
 export default function StickyHeadTable() {
+  const [userId, setUserId] = useState(null);
+  const [favoriteArticles, setFavoriteArticles] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setUserId(decodedToken.nameid);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`https://localhost:5226/api/${userId}/favorites`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch favorite articles');
+          }
+          const data = await response.json();
+          setFavoriteArticles(data);
+        } catch (error) {
+          console.error('Error fetching favorite articles:', error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [userId]);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -51,18 +70,15 @@ export default function StickyHeadTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, index) => {
+              {favoriteArticles.map((row, index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
+                  <Link key={index} to={`/article/${row.articleId}`} style={{ textDecoration: 'none', color: 'inherit'}}>
+                    <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableCell align="center">
+                        {row.title}
+                      </TableCell>
+                    </TableRow>
+                  </Link>
                 );
               })}
             </TableBody>
