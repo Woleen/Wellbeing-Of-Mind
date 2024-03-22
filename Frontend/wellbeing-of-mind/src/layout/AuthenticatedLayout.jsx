@@ -19,9 +19,8 @@ function AuthenticatedLayout() {
     localStorage.removeItem('token');
     window.location.href = '/login';
   };
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(true);
 
-  // Function to toggle the theme
   const toggleTheme = () => {
     setDarkTheme(prevTheme => !prevTheme);
   };
