@@ -59,8 +59,7 @@ const AddToFavoritesButton = ({ userId, articleId, articleTitle }) => {
         throw new Error("Failed to add article to favorites");
       }
 
-      setIsInFavorites(true);
-      alert("Article added to favorites successfully!");
+      setIsInFavorites(!isInFavorites);
     } catch (error) {
       console.error("Error adding article to favorites:", error);
       alert("Error adding article to favorites. Please try again.");

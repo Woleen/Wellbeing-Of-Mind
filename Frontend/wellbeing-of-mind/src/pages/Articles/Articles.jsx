@@ -54,7 +54,7 @@ const ArticleList = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Article List</h2>
+      <h2></h2>
       <div className="row justify-content-center mb-3 mt-3">
         <SearchBar
           searchQuery={searchQuery}
