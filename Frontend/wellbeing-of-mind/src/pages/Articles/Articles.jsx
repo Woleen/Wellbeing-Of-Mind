@@ -12,7 +12,7 @@ const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize] = useState(10);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -54,7 +54,6 @@ const ArticleList = () => {
 
   return (
     <div className="container mt-5">
-      <h2></h2>
       <div className="row justify-content-center mb-3 mt-3">
         <SearchBar
           searchQuery={searchQuery}
@@ -79,11 +78,6 @@ const ArticleList = () => {
           </div>
           <div className="d-flex justify-content-center py-4">
             <Pagination currentPage={currentPage} handlePageChange={handlePageChange} articles={articles} />
-          </div>
-          <div className="d-flex justify-content-center py-4">
-            <button className="btn btn-dark" onClick={handleCreateNew}>
-              <FontAwesomeIcon icon={faPlus} /> Create New
-            </button>
           </div>
         </div>
       )}

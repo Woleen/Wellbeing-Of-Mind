@@ -4,9 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, ThemeProvider, createTheme } from '@mui/material';
-import psychologyImage from "../../images/article_images/psychology.jpg";
-import mentalHealthImage from "../../images/article_images/mental_health.jpg";
-import selfImprovementImage from "../../images/article_images/self_improvement.jpg";
+import psychologyImage from "../../images/article_images/psychology.png";
+import mentalHealthImage from "../../images/article_images/mental_health.png";
+import selfImprovementImage from "../../images/article_images/self_improvement.png";
 
 
 const darkTheme = createTheme({

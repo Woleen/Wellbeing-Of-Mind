@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 
 const columns = [
-  { id: 'title', label: "Favorite Articles", minWidth: 50, align: 'center', minWidth: 170 },
+  { id: 'title', label: "Favorite Articles", align: 'center', minWidth: 170 },
 ];
 
 const darkTheme = createTheme({
@@ -22,7 +22,7 @@ const darkTheme = createTheme({
   },
 });
 
-export default function StickyHeadTable() {
+export default function FavoriteArticlesTable() {
   const [userId, setUserId] = useState(null);
   const [favoriteArticles, setFavoriteArticles] = useState([]);
   const [refresh, setRefresh] = useState(false);
@@ -79,15 +79,16 @@ export default function StickyHeadTable() {
             <TableBody>
               {favoriteArticles.map((row, index) => {
                 return (
-                  <Link key={index} to={`/article/${row.articleId}`} style={{ textDecoration: 'none', color: 'inherit'}}>
-                    <TableRow hover role="checkbox" tabIndex={-1}>
-                      <TableCell align="center">
-                        {row.title}
-                      </TableCell>
-                    </TableRow>
-                  </Link>
-                );
-              })}
+
+                      <TableRow key={index} hover role="checkbox" tabIndex={-1}>
+                        <TableCell align="center">
+                          <Link to={`/article/${row.articleId}`} style={{ textDecoration: 'none', color: 'inherit'}}>
+                            {row.title}
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
             </TableBody>
           </Table>
         </TableContainer>

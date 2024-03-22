@@ -4,7 +4,7 @@ import ArticleEditor from './ArticleEditor';
 
 const ArticleForm = () => {
   const [title, setTitle] = useState('');
-  const [editorHtml, setEditorHtml] = useState(''); // Changed content to editorHtml
+  const [editorHtml, setEditorHtml] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const ArticleForm = () => {
 
     const articleData = {
       title: title,
-      content: editorHtml, // Changed content to editorHtml
+      content: editorHtml,
       type: 'psychology',
     };
 
@@ -36,7 +36,7 @@ const ArticleForm = () => {
       if (response.ok) {
         console.log('Article created successfully!');
         setTitle('');
-        setEditorHtml(''); // Clear editorHtml after successful submission
+        setEditorHtml('');
         navigate('/articles');
       } else {
         throw new Error(`Failed to create article: ${response.statusText}`);

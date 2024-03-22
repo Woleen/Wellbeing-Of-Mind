@@ -22,7 +22,7 @@ function Homepage() {
         </div>
         <div className="col-md-6">
           <h2>Resources</h2>
-          <ul className="list-group">
+          <ul className="list-group mb-4">
             <li className="list-group-item">
               Centrum Wsparcia dla Osób Dorosłych w Kryzysie Psychicznym at <a href="tel:800702222">800 702 222</a> (dorośli).
             </li>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import StickyHeadTable from '../../user_specific/FavoriteArticlesTable';
 import AddToFavoritesButton from "../../user_specific/AddToFavorites";
+import ScrollToTopButton from "../../utils/ToTopButton";
 import { TextToSpeechButton } from "../../utils/TextToSpeechButton";
 import { useParams } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"; // Import jwtDecode from jwt-decode
+import { jwtDecode } from "jwt-decode";
 import "./Articles.css";
 import DOMPurify from 'dompurify';
 
@@ -56,15 +57,22 @@ const ArticleDetail = () => {
               </p>
             </div>
             <div className="col-lg-4">
-              <div className="flex-column position-sticky">
-                <TextToSpeechButton content={article.content} />
-                {userId && <AddToFavoritesButton userId={userId} articleId={articleId} articleTitle={article.title} />}
-                <StickyHeadTable />
+              <div className="flex-column">
+                <div className="mb-3">
+                  <TextToSpeechButton content={article.content} />
+                </div>
+                <div className="mb-3">
+                  {userId && <AddToFavoritesButton userId={userId} articleId={articleId} articleTitle={article.title} />}
+                </div>
+                <div className="mb-4">
+                  {userId &&<StickyHeadTable />}
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
+                <ScrollToTopButton />
     </div>
   );
 };

@@ -90,42 +90,53 @@ const AnxietyTest = () => {
   });
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <div className="container mt-4 blur-background text-white">
-        {analysisResult ? (
-          <div>
-            <p>Your result: {analysisResult}</p>
-          </div>
-        ) : (
-          <div className="row">
-            <div className="col p-4 rounded">
-              <h2 className="" style={{ marginTop: "5vh", marginBottom:"5vh"}}>{test.title}</h2>
-              <div className="col d-flex justify-content-center" style={{ height: "50%"}}>
-                <Card style={{ width: "99%", height:"vh"}}>
-                  <CardContent>
-                    <h5 className="questionContent">
-                      {questions[currentQuestion]?.questionContent}
-                    </h5>
-                    <div>
-                      {questions[currentQuestion]?.choices.map((choice) => (
-                        <button className='btn btn-dark btn-lg mt-4 mr-2'
-                          key={choice.id}
-                          onClick={() => handleAnswer(choice.choiceContent)}
-                          style={{ marginRight: '3vh', marginBottom:'5vh'}}
-                        >
-                          {choice.choiceContent}
-                        </button>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+      <ThemeProvider theme={darkTheme}>
+        <div className="container mt-4 blur-background text-white">
+          {analysisResult ? (
+            <div className="row">
+              <div className="col p-4 rounded">
+                <div className="col d-flex justify-content-center">
+                  <Card style={{ width: "99%", height:"20vh"}}>
+                    <CardContent className="text-center">
+                      <h5 className='mt-4 mb-4'>Result:</h5>
+                      <h5 className="display-4">
+                        {analysisResult}
+                      </h5>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-    </ThemeProvider>
-  );
-};
+          ) : (
+            <div className="row">
+              <div className="col p-4 rounded">
+                <h2 className="" style={{ marginTop: "5vh", marginBottom:"5vh"}}>{test.title}</h2>
+                <div className="col d-flex justify-content-center" style={{ height: "50%"}}>
+                  <Card style={{ width: "99%", height:"vh"}}>
+                    <CardContent>
+                      <h5 className="questionContent">
+                        {questions[currentQuestion]?.questionContent}
+                      </h5>
+                      <div>
+                        {questions[currentQuestion]?.choices.map((choice) => (
+                          <button className='btn btn-dark btn-lg mt-4'
+                            key={choice.id}
+                            onClick={() => handleAnswer(choice.choiceContent)}
+                            style={{ marginRight: '1vh', marginBottom:'5vh'}}
+                          >
+                            {choice.choiceContent}
+                          </button>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </ThemeProvider>
+    );
+ }  
 
 export default AnxietyTest;
