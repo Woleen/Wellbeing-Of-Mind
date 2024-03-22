@@ -7,17 +7,20 @@ It's welcoming page, providing telephone numbers to various crisis helpline serv
 
 ![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/ba32c63a-ad90-4e2c-b99e-137285208241)
 
+
 # Articles
 
 1. Articles page, showing articles about psuchology, mental-health and self-improvement.
    
 ![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/b14367f0-1bcc-472b-b2af-a47e8d5dfbb7)
 
+
 2. Single article with text-to-speech, add-to-favorite functionality and displayed favorite articles of the current user.
    
-![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/e3b65fa9-f547-4144-ae1b-546e2cc97379)
+![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/3a05cc35-fc1c-46d0-8b0f-9edcc814e767)
 
-3. Writing article functionality allows your authorized users to post their own articles.
+
+3. Writing article functionality allows authorized users to post their own articles.
    
 ![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/6837234a-94ff-4f6e-9849-aea06be71ede)
 
