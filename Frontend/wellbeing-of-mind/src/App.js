@@ -11,16 +11,14 @@ import RegisterPage from "./pages/Register/RegisterPage";
 import ArticleForm from "./pages/Articles/NewArticlePage";
 import AuthenticatedLayout from "./layout/AuthenticatedLayout";
 import Homepage from "./pages/Home/Home";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { Profile } from "./pages/Profile/Profile";
+
 
 import "./App.css";
 
 function App() {
-  // State to manage the theme
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(true);
 
-  // Function to toggle the theme
   const toggleTheme = () => {
     setDarkTheme(prevTheme => !prevTheme);
   };
@@ -39,6 +37,7 @@ function App() {
             <Route path="/article/:articleId" element={<ArticleDetail />} />
             <Route path="/newarticle" element={<ArticleForm />} />
             <Route path="/tests" element={<TestsList />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/test/:testId" element={<AnxietyTest />} />

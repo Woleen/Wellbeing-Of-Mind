@@ -80,6 +80,7 @@ function SignUp() {
                   navigate('/login');
               } else {
                   console.error('Registration failed');
+                  window.alert('Damn!');
               }
           } catch (error) {
               console.error('Error:', error);
