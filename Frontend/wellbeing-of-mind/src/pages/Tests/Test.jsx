@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 const AnxietyTest = () => {
@@ -11,8 +12,7 @@ const AnxietyTest = () => {
   const [answers, setAnswers] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [analysisResult, setAnalysisResult] = useState(null);
-  
-  
+
   useEffect(() => {
     const fetchQuestions = async (testId) => {
       try {
@@ -25,14 +25,14 @@ const AnxietyTest = () => {
         console.error('Error fetching questions:', error);
       }
     };
-    
+
     fetchQuestions(testId);
   }, [testId]);
 
-  var answerTypes = questions.map(question => question.choices.map(choice => choice.choiceType));
+  var answerTypes = questions.map((question) =>
+    question.choices.map((choice) => choice.choiceType)
+  );
   answerTypes = answerTypes[0];
-
-  
 
   const handleAnswer = (answer) => {
     const newAnswers = [...answers];
@@ -52,7 +52,9 @@ const AnxietyTest = () => {
 
     userAnswers.forEach((userChoice, index) => {
       const question = questions[index];
-      const selectedChoice = question.choices.find((choice) => choice.choiceContent === userChoice);
+      const selectedChoice = question.choices.find(
+        (choice) => choice.choiceContent === userChoice
+      );
 
       if (selectedChoice) {
         totalScore += getScore(selectedChoice.choiceType);
@@ -60,7 +62,7 @@ const AnxietyTest = () => {
     });
 
     if (totalScore <= 5) {
-      return  answerTypes[0];
+      return answerTypes[0];
     } else if (totalScore <= 12) {
       return answerTypes[1];
     } else {
@@ -70,9 +72,9 @@ const AnxietyTest = () => {
 
   const getScore = (choiceType) => {
     switch (choiceType) {
-      case answerTypes[0] :
+      case answerTypes[0]:
         return 0;
-      case  answerTypes[1]:
+      case answerTypes[1]:
         return 2;
       case answerTypes[2]:
         return 3;
@@ -81,31 +83,48 @@ const AnxietyTest = () => {
     }
   };
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+
   return (
-    <div className='TestTitle'>
-       <h2>{test.title}</h2>
-      {analysisResult ? (
-    <div className='TestTitle'>
-    <p>Your result: {analysisResult}</p>
-    
-  </div>
-) : (
-  <div className="col d-flex justify-content-center">
-    <Card>
-    <CardContent>
-    <h5 className='questionContent'>{questions[currentQuestion]?.questionContent}</h5>
-    <div>
-      {questions[currentQuestion]?.choices.map((choice) => (
-        <button key={choice.id} onClick={() => handleAnswer(choice.choiceContent)}>
-          {choice.choiceContent}
-        </button>
-      ))}
-    </div>
-    </CardContent>
-    </Card>
-  </div>
-)}
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <div className="container mt-4 blur-background text-white">
+        {analysisResult ? (
+          <div>
+            <p>Your result: {analysisResult}</p>
+          </div>
+        ) : (
+          <div className="row">
+            <div className="col p-4 rounded">
+              <h2 className="" style={{ marginTop: "5vh", marginBottom:"5vh"}}>{test.title}</h2>
+              <div className="col d-flex justify-content-center" style={{ height: "50%"}}>
+                <Card style={{ width: "99%", height:"vh"}}>
+                  <CardContent>
+                    <h5 className="questionContent">
+                      {questions[currentQuestion]?.questionContent}
+                    </h5>
+                    <div>
+                      {questions[currentQuestion]?.choices.map((choice) => (
+                        <button className='btn btn-dark btn-lg mt-4 mr-2'
+                          key={choice.id}
+                          onClick={() => handleAnswer(choice.choiceContent)}
+                          style={{ marginRight: '3vh', marginBottom:'5vh'}}
+                        >
+                          {choice.choiceContent}
+                        </button>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </ThemeProvider>
   );
 };
 
