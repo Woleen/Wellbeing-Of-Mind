@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from React Router
+import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { jwtDecode } from "jwt-decode";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
 
 const columns = [
   { id: 'title', label: "Favorite Articles", minWidth: 50, align: 'center', minWidth: 170 },
@@ -23,6 +25,7 @@ const darkTheme = createTheme({
 export default function StickyHeadTable() {
   const [userId, setUserId] = useState(null);
   const [favoriteArticles, setFavoriteArticles] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -49,7 +52,11 @@ export default function StickyHeadTable() {
 
       fetchData();
     }
-  }, [userId]);
+  }, [userId, refresh]);
+
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -64,7 +71,7 @@ export default function StickyHeadTable() {
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
                   >
-                    {column.label}
+                    {column.label}<FontAwesomeIcon icon={faSync} onClick={handleRefresh} style={{ marginLeft: "20px", cursor: 'pointer' }} />
                   </TableCell>
                 ))}
               </TableRow>

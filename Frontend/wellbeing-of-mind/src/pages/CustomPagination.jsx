@@ -23,6 +23,11 @@ export default function CustomPagination({ articles, currentPage, handlePageChan
     <ThemeProvider theme={darkTheme}>
       <Stack spacing={1}>
         <MuiPagination
+        sx={{             
+          backdropFilter: 'blur(5px)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          borderRadius: '20px',
+        }}
           count={Math.ceil(articles.length / 10 + 1)}
           page={currentPage}
           size="large"
