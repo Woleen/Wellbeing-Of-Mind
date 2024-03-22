@@ -62,7 +62,7 @@ namespace wellbeing_of_mind.Controllers
             return Ok(new { token });
         }
 
-        private static string GenerateJwtToken(User user, IEnumerable<string> roles)
+        private static string? GenerateJwtToken(User user, IEnumerable<string> roles)
         {
             try
             {
@@ -78,10 +78,10 @@ namespace wellbeing_of_mind.Controllers
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, string.Join(",", roles))
+                        new Claim(ClaimTypes.NameIdentifier, user.Id),
+                        new Claim(ClaimTypes.Name, user.UserName),
+                        new Claim(ClaimTypes.Email, user.Email),
+                        new Claim(ClaimTypes.Role, string.Join(",", roles))
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)), SecurityAlgorithms.HmacSha256Signature)
@@ -131,7 +131,7 @@ namespace wellbeing_of_mind.Controllers
 
                 return Ok("Article added to favorites successfully");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
             }
