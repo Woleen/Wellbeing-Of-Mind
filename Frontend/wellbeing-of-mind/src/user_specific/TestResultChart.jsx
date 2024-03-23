@@ -10,9 +10,9 @@ const TestResultChart = ({ data }) => {
       label: 'Choice Counts',
       data: data.map(([, count]) => count),
       backgroundColor: [
-        'rgba(255, 0, 0, 0.8)',
-        'rgba(255, 255, 0, 0.8)',
-        'rgba(0, 128, 0, 0.8)',
+        'rgba(0, 0, 0, 0.6)',
+        'rgba(255, 255, 0, 0.6)',
+        'rgba(0, 128, 0, 0.6)',
       ],
       hoverOffset: 4
     }]
