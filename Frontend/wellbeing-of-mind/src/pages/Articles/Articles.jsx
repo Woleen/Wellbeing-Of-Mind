@@ -4,8 +4,6 @@ import Pagination from "../CustomPagination";
 import Loader from "../../utils/Loader";
 import SearchBar from "../../utils/SearchBar";
 import ArticleCard from "./ArticleCard";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Articles.css";
 
 const ArticleList = () => {
@@ -46,10 +44,6 @@ const ArticleList = () => {
 
   const handleSearch = () => {
     setCurrentPage(1);
-  };
-
-  const handleCreateNew = () => {
-    navigate('/newarticle');
   };
 
   return (

@@ -74,7 +74,7 @@ const ArticleForm = () => {
                   required
                 />
               </div>
-              <ArticleEditor value={editorHtml} onChange={handleEditorChange} /> {/* Pass editorHtml instead of content */}
+              <ArticleEditor value={editorHtml} onChange={handleEditorChange} />
               <button type="submit" className="btn btn-dark mt-3" disabled={isLoading} style={{ width: '30%' }}>
                 {isLoading ? 'Submitting...' : 'Submit'}
               </button>
