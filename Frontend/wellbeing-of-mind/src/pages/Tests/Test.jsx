@@ -37,7 +37,7 @@ const AnxietyTest = () => {
     fetchQuestions(testId);
   }, [testId]);
 
-  var answerTypes = questions.map(question => question.choices.map(choice => choice.choiceType));
+  let answerTypes = questions.map(question => question.choices.map(choice => choice.choiceType));
   answerTypes = answerTypes[0];
 
   const handleAnswer = (answer) => {
@@ -62,25 +62,28 @@ const AnxietyTest = () => {
 
   const analyzeAnswers = (userAnswers) => {
     let totalScore = 0;
-
+  
     userAnswers.forEach((userChoice, index) => {
       const question = questions[index];
       const selectedChoice = question.choices.find(
         (choice) => choice.choiceContent === userChoice
       );
-
+  
       if (selectedChoice) {
         totalScore += getScore(selectedChoice.choiceType);
       }
     });
-
+  
+    let resultIndex;
     if (totalScore <= 5) {
-      return  answerTypes[0];
+      resultIndex = 0;
     } else if (totalScore <= 12) {
-      return answerTypes[1];
+      resultIndex = 1;
     } else {
-      return answerTypes[2];
+      resultIndex = 2;
     }
+  
+    return answerTypes[resultIndex];
   };
 
   const getScore = (choiceType) => {
@@ -124,7 +127,6 @@ const AnxietyTest = () => {
                 </div>
               </div>
             </div>
-
           </>
         ) : (
           <div className="row">
@@ -142,7 +144,7 @@ const AnxietyTest = () => {
                           className='btn btn-dark btn-lg mt-4'
                           key={choice.id}
                           onClick={() => handleAnswer(choice.choiceContent)}
-                          style={{ marginRight: '1vh', marginBottom:'5vh'}}
+                          style={{ marginRight: '3vh', marginBottom:'3vh'}}
                         >
                           {choice.choiceContent}
                         </button>
