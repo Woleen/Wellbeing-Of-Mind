@@ -30,3 +30,15 @@ It's welcoming page, providing telephone numbers to various crisis helpline serv
 1. Tests page, displaying avaible tests for the user self-awareness. The tests cover topics such as anxiety levels and attachment styles and more.
 
 ![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/1c9cec9d-c1b7-49e5-870d-2c7eb13145d7)
+
+
+![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/fc4e0531-033c-4130-8ffc-dbddf62417ff)
+
+
+![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/094dfec9-5ac6-47ac-aea4-07936d860958)
+
+
+
+# User Profile
+
+
