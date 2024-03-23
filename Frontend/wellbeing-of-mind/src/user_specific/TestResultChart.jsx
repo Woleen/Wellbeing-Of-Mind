@@ -14,12 +14,12 @@ const TestResultChart = ({ data }) => {
         'rgba(255, 255, 0, 0.6)',
         'rgba(0, 128, 0, 0.6)',
       ],
-      hoverOffset: 4
+      hoverOffset: 10
     }]
   };
 
   return (
-    <div style={{ height: '40vh', margin: 'auto' }}>
+    <div style={{ height: '40vh', margin: 'auto'}}>
       <Pie
         data={chartData}
         options={{

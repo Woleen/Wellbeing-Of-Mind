@@ -113,10 +113,10 @@ const AnxietyTest = () => {
                   <Card style={{ width: "99%", height:"80vh"}}>
                     <CardContent className="text-center">
                       <h5 className='mt-4 mb-4'>Result:</h5>
-                      <h5 className="display-4">
+                      <h5 className="display-6">
                         {analysisResult}
                       </h5>
-                      <div className="col p-4 rounded mt-4">
+                      <div className="col p-4 mt-4">
                         <TestResultChart data={choiceCounts} />
                       </div>
                     </CardContent>
