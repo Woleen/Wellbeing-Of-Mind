@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import StickyHeadTable from '../../user_specific/FavoriteArticlesTable';
 import AddToFavoritesButton from "../../user_specific/AddToFavorites";
 import ScrollToTopButton from "../../utils/ToTopButton";
-import { TextToSpeechButton } from "../../utils/TextToSpeechButton";
+import TextToSpeechButton from "../../utils/TextToSpeechButton";
 import { useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import "./Articles.css";
