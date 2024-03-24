@@ -62,37 +62,32 @@ const AnxietyTest = () => {
 
   const analyzeAnswers = (userAnswers) => {
     let totalScore = 0;
-  
+
     userAnswers.forEach((userChoice, index) => {
       const question = questions[index];
-      const selectedChoice = question.choices.find(
-        (choice) => choice.choiceContent === userChoice
-      );
-  
+      const selectedChoice = question.choices.find((choice) => choice.choiceContent === userChoice);
+
       if (selectedChoice) {
         totalScore += getScore(selectedChoice.choiceType);
       }
     });
-  
-    let resultIndex;
+
     if (totalScore <= 5) {
-      resultIndex = 0;
+      return  answerTypes[0];
     } else if (totalScore <= 12) {
-      resultIndex = 1;
+      return answerTypes[1];
     } else {
-      resultIndex = 2;
+      return answerTypes[2];
     }
-  
-    return answerTypes[resultIndex];
   };
 
   const getScore = (choiceType) => {
     switch (choiceType) {
-      case 'low':
+      case answerTypes[0] :
         return 0;
-      case 'moderate':
+      case  answerTypes[1]:
         return 2;
-      case 'high':
+      case answerTypes[2]:
         return 3;
       default:
         return 0;
