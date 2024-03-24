@@ -17,11 +17,11 @@ It's welcoming page, providing telephone numbers to various crisis helpline serv
 
 2. Single article with text-to-speech, add-to-favorite functionality and displayed favorite articles of the current user.
    
-![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/3a05cc35-fc1c-46d0-8b0f-9edcc814e767)
+![2024-03-2417-46-38-ezgif com-video-to-gif-converter](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/617a774b-41cb-485d-beeb-7506a31ee906)
 
 
 3. Writing article functionality allows authorized users to post their own articles.
-   
+
 ![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/6837234a-94ff-4f6e-9849-aea06be71ede)
 
 
@@ -38,7 +38,7 @@ It's welcoming page, providing telephone numbers to various crisis helpline serv
 ![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/094dfec9-5ac6-47ac-aea4-07936d860958)
 
 
-
 # User Profile
 
+![Pasted image 20240322223612](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/5f2c8795-5bd7-4ca2-b407-f5d20c1cab49)
 
