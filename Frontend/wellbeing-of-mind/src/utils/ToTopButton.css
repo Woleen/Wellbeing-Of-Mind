@@ -1,13 +1,13 @@
 .scroll-to-top-button {
     position: fixed;
     bottom: 5vh;
-    right: 10vh; /* Adjust as needed */
+    right: 50vh; /* Adjust as needed */
     background-color: #333;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 7vh;
-    height: 7vh;
+    width: 8vh;
+    height: 8vh;
     font-size: 1.5rem;
     display: flex;
     justify-content: center;

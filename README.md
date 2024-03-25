@@ -42,3 +42,6 @@ It's welcoming page, providing telephone numbers to various crisis helpline serv
 
 ![Pasted image 20240322223612](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/5f2c8795-5bd7-4ca2-b407-f5d20c1cab49)
 
+# Interesting fact: We are keeping track on visual changes
+
+![image](https://github.com/Woleen/Wellbeing-Of-Mind/assets/94767262/f613171b-8980-416b-b4c4-d22b8c17e21a)
