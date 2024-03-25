@@ -18,7 +18,7 @@ const TestsList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchArticles = async () => {
+    const fetchTests = async () => {
       try {
         setLoading(true);
         const url = searchQuery
@@ -35,7 +35,7 @@ const TestsList = () => {
       }
     };
 
-    fetchArticles();
+    fetchTests();
   }, [currentPage, pageSize, searchQuery]);
 
   const handleCardClick = (testId) => {

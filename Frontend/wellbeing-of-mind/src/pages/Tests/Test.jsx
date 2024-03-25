@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TestResultChart from '../../user_specific/TestResultChart';
 
-const AnxietyTest = () => {
+const Test = () => {
   const { testId } = useParams();
   const [questions, setQuestions] = useState([]);
   const [test, setTest] = useState([]);
@@ -156,4 +156,4 @@ const AnxietyTest = () => {
   );
 };  
 
-export default AnxietyTest;
+export default Test;
